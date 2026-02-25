@@ -85,7 +85,23 @@
   		WHERE NO = #{no}
   	</update>
   
-  
+  	<select id="selectStudentList" resultMap="studentMap">
+  		SELECT *
+  		FROM STUDENT
+  		ORDER BY NO DESC
+  	</select>
+  	
+  	<!-- 
+  		type의 기본생성자 호출후, id와 result태그에 적힌 property의 setter
+  		메서드를 하나하나 호출하여 바인딩해준다.
+  		단, column의 이름과, property의 이름이 동일하다면 생략해도 자동으로 바인딩해준다.
+  	 -->
+  	<resultMap type="student" id="studentMap">
+  		<id column="NO" property="no" />
+  		<result column="NAME" property="name" />
+  		<result column="TEL" property="tel" />
+  		<result column="REG_DATE" property="regDate"/>
+  	</resultMap>
   
   
   
