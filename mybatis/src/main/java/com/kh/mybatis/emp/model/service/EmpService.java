@@ -26,6 +26,28 @@ public class EmpService {
 		return list;
 	}
 
+	public List<Map<String, Object>> search2(Map<String, Object> param) {
+		SqlSession session = SqlSessionTemplate.getSession();
+		List<Map<String, Object>> list = dao.search2(session, param);
+		session.close();
+		return list;
+	}
+
+	public List selectJobList() {
+		SqlSession session = SqlSessionTemplate.getSession();
+		List jobList = dao.selectJobList(session);
+		session.close();
+		return jobList;
+	}
+
+	public List search3(Map<String, Object> param)
+	{
+		SqlSession session = SqlSessionTemplate.getSession();
+		List list = dao.search3(session, param);
+		session.close();
+		return list;
+	}
+
 }
 
 
