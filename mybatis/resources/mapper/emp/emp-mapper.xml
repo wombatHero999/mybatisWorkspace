@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+	<select id="search1" resultType="map">
+		SELECT * 
+		FROM EMP
+		<!-- 
+			검색조건이 사번인 경우
+			WHERE EMP_ID LIKE '%검색키워드%'
+			
+			검색조건이 사원명인 경우
+			WHERE EMP_NAME LIKE ...
+			
+			이메일인 경우 EMAIL
+			
+			전화번호인 경우 PHONE		
+			
+			검색조건에 따라 서로다른 칼럼을 통해 조건식을 작성하는 경우
+			${value}를 사용하여 해결할 수 있다.
+			
+			#{value} : 일반 데이터 바인딩시 사용
+			${value} : 테이블명, 칼럼명, 예약어 등을 바인딩할때 사용	
+		 -->
+		WHERE ${searchType} LIKE '%' || #{searchKeyWord}|| '%'
+		ORDER BY EMP_ID DESC
+	</select>
+	
+	<select id="selectAll" resultType="map">
+		SELECT *
+		FROM EMP
+		ORDER BY EMP_ID DESC
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

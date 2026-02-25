@@ -66,6 +66,7 @@
    -->
   <mappers>
     <mapper resource="/mapper/student/student-mapper.xml"/>
+    <mapper resource="/mapper/emp/emp-mapper.xml" />
   </mappers>
 </configuration>
 
