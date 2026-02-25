@@ -24,8 +24,29 @@
   		- DQL문에서는 resultType이나 resultMap중 하나는 필수로 기술
   		- DML문은 처리한 행의 갯수를 반환하기 때문에 반환타입 설정이 필수가 아니다.
   		- 쿼리문을 실행하는데 필요한 데이터를 바인딩 할때는 #{필드명(VO), KEY값(MAP), 변수명(기본자료형) }를 사용
-  		
-  		
+  		  하거나 ${필드명, 변수명, key값}
+  		  
+  		2. resultMap태그
+  		 - ResultSet으로 조회된 칼럼값을 하나씩 뽑아서 내가 지정한 vo클래스의 각 필드에
+  		 직접 데이터를 매핑하는 태그.
+  		 
+  		 - 기본생성자 호출 후, 각 태그에 저장된 property의 setter메서드를 호출하여 데이터바인딩
+  		 <resultMap id="식별자" type="반환타입">
+  		 	<id  column="db컬럼" property="필드명"/>
+  		 	<result column="db컬럼" property="필드명" />
+  		 	...
+  		 	<collection property="필드명" resultMap="식별자"/>
+  		 	<association property="필드명" resultMap="식별자"/>
+  		 </resultMap>
+  		 
+  		 - 생성자방식의 데이터 바인딩
+  		 <resultMap id="..." type="...">
+  		 	<constructor>
+  		 		<idArg />
+  		 		<arg />
+  		 		...
+  		 	</constructor>
+  		 </resultMap>
   	 -->
 	<insert id="insertStudent" parameterType="com.kh.mybatis.student.service.model.vo.Student">
 		INSERT INTO STUDENT(NO, NAME, TEL)
@@ -36,6 +57,39 @@
   		INSERT INTO STUDENT(NO, NAME, TEL)
   		VALUES (SEQ_STUDENT_NO.NEXTVAL, #{name}, #{tel})
   	</insert>
+  
+  	<select id="selectStudentCount" resultType="int">
+  		SELECT COUNT(*)
+  		FROM STUDENT
+  	</select>
+  	<!-- 
+  		resultSet 자동으로 VO클래스로 매핑
+  		1. 조회한 칼럼명과 동일한 이름의 필드의 setter메서드를 호출하여 값을 대입
+  		2. 자동형변환처리
+  		   varchar2, char -> String
+  		   number -> int/double
+  		   date -> java.util.Date
+  	
+  	 -->
+  	<select id="selectStudent" parameterType="int" resultType="student" >
+  		SELECT 
+  			NO, NAME, TEL, REG_DATE as "regDate"
+  		FROM STUDENT
+  		WHERE NO = #{no}
+  	</select>
+  
+  	<update id="updateStudent" parameterType="student">
+  		UPDATE STUDENT
+  		SET NAME = #{name} ,
+  		    TEL = #{tel}
+  		WHERE NO = #{no}
+  	</update>
+  
+  
+  
+  
+  
+  
   
   
   

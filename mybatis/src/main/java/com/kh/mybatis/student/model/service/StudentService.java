@@ -40,7 +40,38 @@ public class StudentService {
 		return result;		
 	}
 
+	public int selectStudentCount() {
+		SqlSession session = SqlSessionTemplate.getSession();
+		int total = dao.selectStudentCount(session);
+		session.close();
+		return total;
+	}
+
+	public Student selectOneStudent(int no) {
+		SqlSession session = SqlSessionTemplate.getSession();
+		Student s = dao.selectStudent(session, no);
+		session.close();
+		return s;
+	}
+
+	public int updateStudent(Student s) {
+		SqlSession session = SqlSessionTemplate.getSession();
+		int result = dao.updateStudent(session, s);
+		
+		if(result > 0) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
+		session.close();
+		return result;
+	}
+
 }
+
+
+
+
 
 
 

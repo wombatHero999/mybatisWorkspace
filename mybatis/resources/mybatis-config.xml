@@ -25,6 +25,12 @@
 	 	<setting name="mapUnderscoreToCamelCase" value="true"/>
 	 </settings>
 	
+	<typeAliases>
+		<typeAlias type="com.kh.mybatis.student.service.model.vo.Student"
+			alias="student" />
+	</typeAliases>
+	
+	
 	<!-- 
 		environments
 		 - MyBatis로 연동할 DB의 정보들을 등록하는 영역

@@ -17,7 +17,26 @@ public class StudentDao {
 		return session.insert("student.insertStudentMap", param);
 	}
 
+	public int selectStudentCount(SqlSession session) {
+		return session.selectOne("student.selectStudentCount");
+	}
+
+	public Student selectStudent(SqlSession session, int no) {
+		return session.selectOne("student.selectStudent", no);
+	}
+
+	public int updateStudent(SqlSession session, Student s) {
+		return session.update("student.updateStudent" , s);
+	}
+
 }
+
+
+
+
+
+
+
 
 
 
